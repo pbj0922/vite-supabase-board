@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
+import CreatePost from "./pages/CreatePost";
 
 const App: FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create-post" element={<CreatePost />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
