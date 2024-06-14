@@ -37,13 +37,7 @@ const Profile: FC = () => {
   };
 
   return (
-    <Flex
-      bgColor="orange.100"
-      maxW={400}
-      mx="auto"
-      flexDir="column"
-      alignItems="center"
-    >
+    <Flex maxW={400} mx="auto" flexDir="column" alignItems="center">
       <Flex justifyContent="center" my={4}>
         <Text>프로필</Text>
       </Flex>

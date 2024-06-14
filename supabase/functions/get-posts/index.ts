@@ -13,12 +13,14 @@ Deno.serve(async (req) => {
     Deno.env.get("SUPABASE_ANON_KEY") ?? "",
   );
 
-  // 프로필 정보
-  // 최근거 부터
-  // 2개 -> 10개
+  const perPage = 10;
+
   const { data } = await supabaseClient.from("post").select(
     "*, profile!inner(*)",
-  ).order("id", { ascending: false }).range(0 + page * 2, 1 + page * 2);
+  ).order("id", { ascending: false }).range(
+    0 + page * perPage,
+    perPage - 1 + page * perPage,
+  );
 
   return new Response(JSON.stringify(data), {
     headers: { ...corsHeaders, "Content-Type": "application/json" },

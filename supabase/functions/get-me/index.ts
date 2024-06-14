@@ -6,7 +6,7 @@ Deno.serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  const authHeader = req.headers.get("Authorization");
+  const authHeader = req.headers.get("Authorization")!;
 
   const supabaseClient = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",

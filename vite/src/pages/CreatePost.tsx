@@ -1,15 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import supabaseClient from "../lib/supabaseClient";
 import { Button, Flex, Input, Textarea } from "@chakra-ui/react";
-import { useOutletContext, useNavigate } from "react-router-dom";
-import { OutletContext } from "../components/Layout";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost: FC = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const { posts, setPosts } = useOutletContext<OutletContext>();
 
   const navigate = useNavigate();
 
@@ -19,7 +16,7 @@ const CreatePost: FC = () => {
 
       setIsLoading(true);
 
-      const { data } = await supabaseClient.functions.invoke("create-post", {
+      await supabaseClient.functions.invoke("create-post", {
         body: {
           title,
           content,
@@ -27,8 +24,6 @@ const CreatePost: FC = () => {
       });
 
       setIsLoading(false);
-
-      setPosts([data, ...posts]);
 
       navigate("/");
     } catch (error) {
@@ -38,19 +33,8 @@ const CreatePost: FC = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
-
   return (
-    <Flex
-      bgColor="orange.100"
-      flexDir="column"
-      maxW={600}
-      mx="auto"
-      mt={8}
-      gap={8}
-    >
+    <Flex flexDir="column" maxW={600} mx="auto" mt={8} gap={8}>
       <Input
         value={title}
         onChange={(e) => setTitle(e.target.value)}

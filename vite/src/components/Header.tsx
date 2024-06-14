@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import { Session } from "@supabase/supabase-js";
 import { FC } from "react";
 import { Link } from "react-router-dom";
@@ -12,13 +12,8 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ session, profile }) => {
   return (
-    <Flex
-      justifyContent="space-between"
-      alignItems="center"
-      py={2}
-      bgColor="red.100"
-    >
-      <Text>로고</Text>
+    <Flex justifyContent="space-between" alignItems="center" py={2}>
+      <Link to="/">로고</Link>
       <Flex>
         {session ? (
           profile?.nickname ? (

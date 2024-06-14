@@ -6,7 +6,7 @@ export interface IProfile {
 
 export interface IPost {
   id: number;
-  create_at: number;
+  created_at: string;
   title: string;
   content: string;
   profile: IProfile;

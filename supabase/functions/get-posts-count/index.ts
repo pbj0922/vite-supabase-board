@@ -6,24 +6,16 @@ Deno.serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  const authHeader = req.headers.get("Authorization")!;
-  const { title, content } = await req.json();
-
   const supabaseClient = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
     Deno.env.get("SUPABASE_ANON_KEY") ?? "",
-    { global: { headers: { Authorization: authHeader } } },
   );
 
-  const { data: { user } } = await supabaseClient.auth.getUser();
+  const { count } = await supabaseClient.from("post").select("*", {
+    count: "exact",
+  });
 
-  const { data } = await supabaseClient.from("post").insert({
-    title,
-    content,
-    user_id: user?.id,
-  }).select().single();
-
-  return new Response(JSON.stringify(data), {
+  return new Response(JSON.stringify(count), {
     headers: { ...corsHeaders, "Content-Type": "application/json" },
   });
 });
